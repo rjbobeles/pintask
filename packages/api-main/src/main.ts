@@ -10,9 +10,10 @@ import { generalConfig } from './config/generalConfig'
 import { ErrorCodes } from './constants'
 import { HttpExceptionHandler } from './middleware'
 import { router } from './routes'
+import { initialize_mongoose_connection } from './schema'
 import { HttpException } from './utils'
 
-const createServer = () => {
+const createServer = async () => {
   const app = express()
 
   app.set('json spaces', 2)
@@ -41,6 +42,9 @@ const createServer = () => {
   app.use(router)
   app.use((req, res, next) => next(new HttpException(404, 'Not Found', 'The requested resource was not found.', ErrorCodes.RESOURCE_NOT_FOUND)))
   app.use(HttpExceptionHandler)
+
+  // Initialize Database Connection
+  await initialize_mongoose_connection()
 
   app.listen(generalConfig.port, () => {
     consola.ready({
