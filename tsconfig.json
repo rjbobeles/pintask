@@ -8,6 +8,9 @@
     },
     {
       "path": "./packages/app-main"
+    },
+    {
+      "path": "./packages/api-main"
     }
   ]
 }
