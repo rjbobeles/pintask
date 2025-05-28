@@ -17,6 +17,6 @@
     "Orta.vscode-jest",
     "redhat.vscode-yaml",
     "streetsidesoftware.code-spell-checker",
-    "tilt-dev.tiltfile",
+    "tilt-dev.tiltfile"
   ]
 }
