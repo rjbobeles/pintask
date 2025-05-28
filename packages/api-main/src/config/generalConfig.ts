@@ -1,6 +1,5 @@
 import { CorsOptions } from 'cors'
 import { HelmetOptions } from 'helmet'
-import { Options as HppOptions } from 'hpp'
 
 interface GeneralConfig {
   name: string
@@ -8,7 +7,6 @@ interface GeneralConfig {
   port: number
   cors: CorsOptions
   helmet: HelmetOptions
-  hpp: HppOptions
 }
 
 export const generalConfig: GeneralConfig = {
@@ -17,9 +15,4 @@ export const generalConfig: GeneralConfig = {
   port: 4000,
   cors: {},
   helmet: {},
-  hpp: {
-    checkBody: true,
-    checkQuery: true,
-    whitelist: [],
-  },
 }
