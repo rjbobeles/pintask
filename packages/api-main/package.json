@@ -1,5 +1,5 @@
 {
-  "name": "@globe-task/api-main",
+  "name": "api-main",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -33,9 +33,15 @@
     }
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "consola": "^3.4.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21"
+    "@types/cors": "^2.8.18",
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9"
   }
 }
