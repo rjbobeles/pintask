@@ -11,4 +11,6 @@ router.use('/session', [DeviceIdGuard], modules.UserSession.router)
 
 router.use('/user', [DeviceIdGuard], modules.User.router)
 
+router.use('/task', [DeviceIdGuard], modules.Task.router)
+
 export { router }

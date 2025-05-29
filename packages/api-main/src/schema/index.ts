@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 
 export { User, type UserData } from './user.schema'
 export { UserSession, type UserAgentData, type UserSessionData } from './user_session.schema'
+export { Task, type TaskData } from './tasks.schema'
 
 import { databaseConfig } from '../config/databaseConfig'
 
