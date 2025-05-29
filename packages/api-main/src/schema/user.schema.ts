@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types } from 'mongoose'
+import mongoose, { InferSchemaType, Schema, Types } from 'mongoose'
 
 export const SCHEMA_NAME = 'users'
 
@@ -29,10 +29,6 @@ export const UserSchema = new Schema(
       default: '',
       maxlength: 300,
     },
-    email_verified: {
-      type: Boolean,
-      default: false,
-    },
     created_at: {
       type: Date,
       default: Date.now,
@@ -46,5 +42,7 @@ export const UserSchema = new Schema(
     collection: SCHEMA_NAME,
   },
 )
+
+export type UserData = InferSchemaType<typeof UserSchema>
 
 export const User = mongoose.model(SCHEMA_NAME, UserSchema)

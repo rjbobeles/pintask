@@ -28,7 +28,6 @@ const createServer = async () => {
   app.get('/health', (req: Request, res: Response, next: NextFunction) => {
     try {
       res.json({
-        status: 'Ok',
         code: res.statusCode,
         name: generalConfig.name,
         environment: generalConfig.environment_name,
@@ -39,7 +38,7 @@ const createServer = async () => {
     }
   })
 
-  app.use(router)
+  app.use('/api', router)
   app.use((req, res, next) => next(new HttpException(404, 'Not Found', 'The requested resource was not found.', ErrorCodes.RESOURCE_NOT_FOUND)))
   app.use(HttpExceptionHandler)
 

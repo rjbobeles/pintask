@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types } from 'mongoose'
+import mongoose, { InferSchemaType, Schema, Types } from 'mongoose'
 
 export const SCHEMA_NAME = 'user_sessions'
 
@@ -32,6 +32,8 @@ export const UserAgentDataSchema = new Schema(
   },
   { _id: false },
 )
+
+export type UserAgentData = InferSchemaType<typeof UserAgentDataSchema>
 
 export const UserSessionSchema = new Schema(
   {
@@ -86,5 +88,7 @@ export const UserSessionSchema = new Schema(
     collection: SCHEMA_NAME,
   },
 )
+
+export type UserSessionData = InferSchemaType<typeof UserSessionSchema>
 
 export const UserSession = mongoose.model(SCHEMA_NAME, UserSessionSchema)

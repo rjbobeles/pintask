@@ -2,7 +2,7 @@ import consola from 'consola'
 import mongoose from 'mongoose'
 
 export { User } from './user.schema'
-export { UserSession } from './user_session.schema'
+export { UserSession, type UserAgentData, type UserSessionData } from './user_session.schema'
 
 import { databaseConfig } from '../config/databaseConfig'
 
