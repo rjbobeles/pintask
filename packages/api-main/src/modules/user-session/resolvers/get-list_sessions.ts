@@ -87,13 +87,17 @@ export const ListSessions = async (req: Request, res: Response, next: NextFuncti
     }
 
     res.json({
-      message: 'Successfully retrieved sessions!',
+      message: 'Successfully retrieved sessions',
       data: {
         count: await UserSession.countDocuments(searchQuery),
         sessions: await UserSession.find(
           searchQuery,
           { nonce: 0 },
-          { skip: req.query.skip !== undefined ? Number(req.query.skip) : 0, limit: req.query.limit ? Number(req.query.limit) : 10 },
+          {
+            skip: req.query.skip !== undefined ? Number(req.query.skip) : 0,
+            limit: req.query.limit ? Number(req.query.limit) : 10,
+            sort: { created_at: -1 },
+          },
         )
           .lean()
           .exec()

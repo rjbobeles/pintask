@@ -33,7 +33,7 @@ export const RevokeSession = async (req: Request, res: Response, next: NextFunct
     if (updateAck.modifiedCount !== 1) throw new HttpException(500, 'Session invalidation failed', undefined, ErrorCodes.INTERNAL_SERVER_ERROR)
 
     res.json({
-      message: 'Successfully revoked session!',
+      message: 'Successfully revoked session',
     })
   } catch (error) {
     next(error)
