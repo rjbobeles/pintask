@@ -32,7 +32,7 @@ export const sign_tokens = async (session: UserSessionData): Promise<{ access_to
       sub: session._userId,
     },
     jwtConfig.jwt_private_access_key,
-    { expiresIn: '1d', algorithm: 'RS256' },
+    { expiresIn: '7d', algorithm: 'RS256' },
   )
 
   return { access_token, refresh_token }
