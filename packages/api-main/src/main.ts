@@ -28,7 +28,6 @@ const createServer = async () => {
   app.get('/health', (req: Request, res: Response, next: NextFunction) => {
     try {
       res.json({
-        code: res.statusCode,
         name: generalConfig.name,
         environment: generalConfig.environment_name,
         message: 'Service is running perfectly!',
