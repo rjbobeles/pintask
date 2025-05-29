@@ -1,0 +1,32 @@
+---
+services:
+  # --------------
+  # Backend API
+  # --------------
+  api-main:
+    build:
+      context: ../
+      dockerfile: docker/DockerFile.api-main
+    container_name: api-main
+    environment:
+      # Database
+      - MONGO_CONNECTION_STRING=mongodb://mongodb:27017/api-main
+
+      # JWT
+      - JWT_ACCESS_PUBKEY
+      - JWT_ACCESS_PRVKEY
+      - JWT_REFRESH_PUBKEY
+      - JWT_REFRESH_PRVKEY
+    ports:
+      - 4000:4000
+
+  # --------------
+  # Frontend App
+  # --------------
+  app-main:
+    build:
+      context: ../
+      dockerfile: docker/DockerFile.app-main
+    container_name: app-main
+    ports:
+      - 80:80

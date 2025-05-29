@@ -1,0 +1,9 @@
+# Setup
+def yarn_install(): 
+  local_resource(
+    name = "Yarn Install",
+    cmd = "yarn install",
+    labels=['setup'],
+    allow_parallel=True,
+  )
+

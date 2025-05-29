@@ -1,0 +1,32 @@
+load('ext://dotenv', 'dotenv')
+dotenv()
+
+config.define_string("compose")
+compose_setting = config.parse().get('compose', 'core')
+
+if compose_setting not in ("core", "all", "k8s"):
+  compose_setting = "core"
+
+# Run core services
+docker_compose(
+  configPaths="./docker/docker-compose-core.yml",
+  env_file=".env",
+  project_name="pintask",
+  wait=True
+)
+dc_resource('mongodb', labels=['core'])
+
+# Setup
+setup_symbols = load_dynamic('./tilt/setup/TiltFile')
+
+if compose_setting not in ('k8s', 'all'):
+  setup_symbols['yarn_install']()
+
+# Service
+service_symbols = load_dynamic('./tilt/service/TiltFile')
+if compose_setting == 'all':
+    service_symbols['setup_service_compose']()
+elif compose_setting == 'k8s': 
+    service_symbols['setup_k8s_application']()
+else:
+    service_symbols['setup_service_manual']()

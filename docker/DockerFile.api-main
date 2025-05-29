@@ -1,0 +1,63 @@
+# NPM Package Installation
+FROM node:22-bookworm-slim AS deps
+
+WORKDIR /app
+
+# Workspace Dependencies - Api Main
+COPY packages/api-main/tsconfig.json /app/packages/api-main/tsconfig.json
+COPY packages/api-main/package.json /app/packages/api-main/package.json
+
+# Workspace Dependencies - Monorepo
+COPY package.json /app/
+COPY yarn.lock /app/
+
+RUN yarn install --frozen-lockfile
+
+# Application Builder
+FROM node:22-bookworm-slim AS application-builder
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules /app/node_modules
+
+# For caching; Instead of copying everything in the monorepo. Saves a bit of time
+COPY .prettierrc /app/.prettierrc
+COPY .prettierignore /app/.prettierignore
+COPY eslint.config.mjs /app/eslint.config.mjs
+COPY jest.config.ts /app/jest.config.ts
+COPY jest.preset.js /app/jest.preset.js
+COPY nx.json /app/nx.json
+COPY package.json /app/package.json
+COPY tsconfig.base.json /app/tsconfig.base.json
+COPY tsconfig.json /app/tsconfig.json
+COPY yarn.lock /app/yarn.lock
+
+# App
+COPY packages/app-main/tsconfig.json /app/packages/app-main/tsconfig.json
+COPY packages/app-main/package.json /app/packages/app-main/package.json
+
+# App-E2E
+COPY packages/app-main-e2e/tsconfig.json /app/packages/app-main-e2e/tsconfig.json
+COPY packages/app-main-e2e/package.json /app/packages/app-main-e2e/package.json
+
+# Source
+COPY packages/api-main /app/packages/api-main
+
+RUN yarn nx sync 
+
+RUN NX_DAEMON=false yarn nx run api-main:build --skip-nx-cache
+
+# Main Image
+FROM node:22-bookworm-slim AS runner
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules /app/node_modules
+
+COPY --from=application-builder /app/packages/api-main/package.json /app/packages/api-main/package.json
+COPY --from=application-builder /app/packages/api-main/tsconfig.json /app/packages/api-main/tsconfig.json
+COPY --from=application-builder /app/packages/api-main/dist /app/packages/api-main/dist
+
+EXPOSE 4000
+
+CMD [ "nodejs", "/app/packages/api-main/dist/main.js" ]

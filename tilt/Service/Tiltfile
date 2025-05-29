@@ -1,0 +1,40 @@
+def setup_service_compose():
+    docker_compose(
+        configPaths="./docker/docker-compose-services.yml",
+        env_file=".env",
+        project_name="pintask",
+        wait=True
+    )
+    dc_resource('api-main', labels=['service'], resource_deps=["mongodb"])
+    dc_resource('app-main', labels=['application'], resource_deps=['api-main'])
+
+def setup_k8s_application():
+    print('todo')
+
+def setup_service_manual(): 
+    local_resource(
+        name="main-service",
+        serve_cmd="yarn nx run api-main:serve --configuration=development",
+        allow_parallel=True,
+        serve_env={
+            # Database
+            "MONGO_CONNECTION_STRING": "mongodb://localhost:27017/api-main",
+
+            # JWT
+            "JWT_ACCESS_PUBKEY": os.getenv('JWT_ACCESS_PUBKEY', ''),
+            "JWT_ACCESS_PRVKEY": os.getenv('JWT_ACCESS_PRVKEY', ''),
+            "JWT_REFRESH_PUBKEY": os.getenv('JWT_REFRESH_PUBKEY', ''),
+            "JWT_REFRESH_PRVKEY": os.getenv('JWT_REFRESH_PRVKEY', ''),
+        },
+        labels=['service'],
+        resource_deps=['Yarn Install', 'mongodb']
+    )
+
+    local_resource(
+        name="app-main",
+        serve_cmd="yarn nx run app-main:dev",
+        allow_parallel=True,
+        serve_env={},
+        labels=['application'],
+        resource_deps=['Yarn Install', 'mongodb']
+    )
