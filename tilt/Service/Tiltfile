@@ -6,10 +6,73 @@ def setup_service_compose():
         wait=True
     )
     dc_resource('api-main', labels=['service'], resource_deps=["mongodb"])
-    dc_resource('app-main', labels=['application'], resource_deps=['api-main'])
+    dc_resource('app-main', labels=['application'], resource_deps=['api-main'])  # Due to OS restrictions; you cant run this on port 80
 
 def setup_k8s_application():
-    print('todo')
+    k8s_yaml(kustomize('./kubernetes/overlays/local/namespace'))
+    k8s_resource(
+        objects=[
+            'pintask-local:namespace', 
+            'local-namespace-resource-quota:resourcequota', 
+            'local-namespace-limit-range:limitrange', 
+            'local-namespace-network-deny-all:networkpolicy'
+        ],
+        new_name='namespace-resources',
+        labels=['resources']
+    )
+
+    # Api Main
+    k8s_yaml(kustomize('./kubernetes/overlays/local/applications/api-main'))
+    docker_build(
+        ref='api-main', 
+        context='.', 
+        dockerfile='./docker/DockerFile.api-main',
+        extra_tag=['latest']
+    )
+    k8s_resource(
+        workload='local-api-main', 
+        new_name='api-main', 
+        port_forwards=4000,
+        labels=['service'],
+        resource_deps=['namespace-resources']
+    )
+    k8s_resource(
+        objects=[
+            'local-api-main-config-map:configmap',
+            'local-api-main-secret:secret',
+            'local-api-main-disruption-budget:poddisruptionbudget',
+            'local-api-main-horizontal-scaler:horizontalpodautoscaler',
+            'local-api-main-network:networkpolicy'
+        ],
+        new_name='api-main-resources',
+        labels=['resources'],
+        resource_deps=['namespace-resources']
+    )
+
+    # App Main
+    k8s_yaml(kustomize('./kubernetes/overlays/local/applications/app-main'))
+    docker_build(
+        ref='app-main', 
+        context='.', 
+        dockerfile='./docker/DockerFile.app-main',
+        extra_tag=['latest']
+    )
+    k8s_resource(
+        workload='local-app-main', 
+        new_name='app-main', 
+        port_forwards='3000:80', # Due to OS restrictions; you cant run this on port 80
+        labels=['service']
+    )
+    k8s_resource(
+        objects=[
+            'local-app-main-disruption-budget:poddisruptionbudget',
+            'local-app-main-horizontal-scaler:horizontalpodautoscaler',
+            'local-app-main-network:networkpolicy'
+        ],
+        new_name='app-main-resources',
+        labels=['resources'],
+        resource_deps=['namespace-resources']
+    )
 
 def setup_service_manual(): 
     local_resource(

@@ -29,4 +29,4 @@ services:
       dockerfile: docker/DockerFile.app-main
     container_name: app-main
     ports:
-      - 80:80
+      - 3000:80

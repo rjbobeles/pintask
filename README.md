@@ -14,29 +14,20 @@
 
 ## Software Requirements
 
-- Docker
+- Docker (with K8s; or Minikube)
 - MongoDB Compass
 - NodeJS
-- Tilt
+- [Tilt](https://tilt.dev)
 - VSCode (With the recommended extensions installed)
 
 ## Running the Services
 
-There are two ways to run the monorepo: manually or using Tilt. The manual method and tilt without `--compose=all` allows you to develop with breakpoints. Do note that manual setup is required for the manual method and is not recommended for use.
-
-### Method 1: Manual
-
-1. Create the `.env` file in each service's directory and provide the necessary values.
-2. Use the NX console to launch all services manually.
-
-### Method 2: Tilt
-
 1. Duplicate the `.env.sample` file located in the root directory and provide the necessary values.
 2. Run `tilt up` to start the services on your local machine.
 
-   - **`tilt up`**: Runs the services locally, excluding MongoDB.
-   - **`tilt up -- --compose=k8s`**: Runs all services in kubernetes
-   - **`tilt up -- --compose=all`**: Runs all services, in Docker Compose.
+   - **`tilt up`**: Runs the services locally; MongoDB using docker-compose
+   - **`tilt up -- --compose=k8s`**: Runs all services in kubernetes; MongoDB using docker-compose
+   - **`tilt up -- --compose=all`**: Runs all services in Docker Compose.
 
 ## Port Mapping
 

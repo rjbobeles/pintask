@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../../base/applications/app-main
+
+namePrefix: local-
+namespace: pintask-local
+
+images:
+  - name: app-main-image
+    newName: app-main
+    newTag: latest
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/minAvailable
+        value: 0
+    target:
+      kind: PodDisruptionBudget
+      name: app-main-disruption-budget
+
+  - patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 1
+      - op: replace
+        path: /spec/maxReplicas
+        value: 1
+    target:
+      kind: HorizontalPodAutoscaler
+      name: app-main-horizontal-scaler

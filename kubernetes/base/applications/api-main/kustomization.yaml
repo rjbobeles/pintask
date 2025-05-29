@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - api-main.config-map.yaml
+  - api-main.deployment.yaml
+  - api-main.disruption-budget.yaml
+  - api-main.horizontal-scaler.yaml
+  - api-main.network.yaml
+  - api-main.secret.yaml
+  - api-main.service.yaml

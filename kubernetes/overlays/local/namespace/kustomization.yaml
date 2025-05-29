@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../base/namespace
+
+namePrefix: local-
+namespace: pintask-local
+
+patches:
+  - patch: |-
+      - op: add
+        path: /metadata/labels/cluster_environment
+        value: local
+    target:
+      kind: Namespace
+      name: pintask

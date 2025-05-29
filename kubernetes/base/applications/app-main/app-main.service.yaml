@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-main
+  namespace: pintask
+  labels:
+    app: app-main
+spec:
+  selector:
+    app: app-main
+  ports:
+    - name: http
+      port: 80
+  type: ClusterIP
