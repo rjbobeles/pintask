@@ -10,8 +10,8 @@ interface GeneralConfig {
 }
 
 export const generalConfig: GeneralConfig = {
-  name: 'API Main',
-  environment_name: 'development',
+  name: process.env.NAME ? process.env.NAME : 'API Main',
+  environment_name: process.env.ENVIRONMENT_NAME ? process.env.ENVIRONMENT_NAME : 'development',
   port: 4000,
   cors: {},
   helmet: {},
