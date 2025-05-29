@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { FilterQuery, Types } from 'mongoose'
+import { FilterQuery } from 'mongoose'
 
 import { ErrorCodes } from '../../../constants'
 import { UserSession, UserSessionData } from '../../../schema'
@@ -72,7 +72,7 @@ export const ListSessions = async (req: Request, res: Response, next: NextFuncti
     )
     if (errors !== null) throw new HttpException(400, 'Unable to process request due to malformed data', errors, ErrorCodes.VALIDATION_ERROR)
 
-    const searchQuery: FilterQuery<UserSessionData> = { _userId: new Types.ObjectId(req.user.data._id as string) }
+    const searchQuery: FilterQuery<UserSessionData> = { _userId: req.user.data._id }
 
     const status = req.query.status as string[]
 
