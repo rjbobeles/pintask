@@ -2,29 +2,22 @@
   "name": "app-main",
   "version": "0.0.1",
   "private": true,
-  "type": "module",
-  "scripts": {},
-  "sideEffects": false,
   "nx": {
     "name": "app-main"
   },
   "dependencies": {
-    "@react-router/node": "^7.2.0",
-    "@react-router/serve": "^7.2.0",
-    "@tailwindcss/vite": "^4.1.7",
-    "isbot": "^4.4.0",
     "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "react-router": "^7.2.0",
-    "tailwindcss": "^4.1.7"
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@react-router/dev": "^7.2.0",
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.1.0",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "@vitest/ui": "^3.0.0"
+    "@vitest/ui": "^3.0.0",
+    "autoprefixer": "10.4.13",
+    "postcss": "8.4.38",
+    "tailwindcss": "3.4.3"
   }
 }

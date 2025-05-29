@@ -11,6 +11,9 @@
     },
     {
       "path": "./packages/api-main"
+    },
+    {
+      "path": "./packages/app-main-e2e"
     }
   ]
 }

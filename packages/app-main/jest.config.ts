@@ -6,7 +6,6 @@ swcJestConfig.swcrc = false
 export default {
   displayName: 'app-main',
   preset: '../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['@swc/jest', swcJestConfig],

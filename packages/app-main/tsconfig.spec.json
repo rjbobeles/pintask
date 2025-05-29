@@ -7,7 +7,6 @@
     "module": "esnext",
     "moduleResolution": "bundler"
   },
-  "files": ["src/test-setup.ts"],
   "include": [
     "jest.config.ts",
     "src/**/*.test.ts",
@@ -18,11 +17,7 @@
     "src/**/*.spec.js",
     "src/**/*.test.jsx",
     "src/**/*.spec.jsx",
-    "src/**/*.d.ts",
-    "test/**/*.spec.tsx",
-    "test/**/*.spec.ts",
-    "test/**/*.test.tsx",
-    "test/**/*.test.ts"
+    "src/**/*.d.ts"
   ],
   "references": [
     {
