@@ -1,0 +1,45 @@
+name: Create Release Tags
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Version tag to create (e.g., v1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  release-tags:
+    name: Create Release Tags
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --focus
+
+      - name: Configure Git User
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Create Release and Push to Github
+        run: |
+          yarn nx release changelog ${{ github.event.inputs.tag }} --git-commit=false --git-tag=false
+          yarn nx release version ${{ github.event.inputs.tag }} --git-commit=false --git-tag=false
+          git add .
+          git commit -m "chore(release): publish ${{ github.event.inputs.tag }}"
+          git tag v${{ github.event.inputs.tag }}
+          git push
+          git push --tag
