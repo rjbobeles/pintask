@@ -14,6 +14,12 @@
     ],
     "sharedGlobals": []
   },
+  "sync": {
+    "applyChanges": true
+  },
+  "release": {
+    "projects": ["*"]
+  },
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
