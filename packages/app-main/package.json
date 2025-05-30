@@ -3,7 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "nx": {
-    "name": "app-main"
+    "name": "app-main",
+    "targets": {
+      "test": {
+        "options": {
+          "passWithNoTests": true
+        }
+      }
+    }
   },
   "dependencies": {
     "react": "19.0.0",
