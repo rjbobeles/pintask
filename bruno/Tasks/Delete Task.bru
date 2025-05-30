@@ -1,0 +1,24 @@
+meta {
+  name: Delete Task
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{API_URL}}/api/task/{{TASK_ID}}
+  body: none
+  auth: bearer
+}
+
+headers {
+  device_id: {{DEVICE_ID}}
+}
+
+auth:bearer {
+  token: {{ACCESS_TOKEN}}
+}
+
+vars:pre-request {
+  TASK_ID: 6839675c434b29ff9dbbef20
+}
+

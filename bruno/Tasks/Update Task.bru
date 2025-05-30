@@ -1,0 +1,29 @@
+meta {
+  name: Update Task
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{API_URL}}/api/task/{{TASK_ID}}
+  body: json
+  auth: bearer
+}
+
+headers {
+  device_id: {{DEVICE_ID}}
+}
+
+auth:bearer {
+  token: {{ACCESS_TOKEN}}
+}
+
+body:json {
+  {
+      "title": "First Item Updated"
+  }
+}
+
+vars:pre-request {
+  TASK_ID: 6839675c434b29ff9dbbef20
+}

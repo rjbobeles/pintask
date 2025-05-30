@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+- [Introduction](#introduction)
 - [Decisions Made](#decisions-made)
 - [Software Requirements](#software-requirements)
 - [Running the Services](#running-the-services)
@@ -10,10 +11,13 @@
 - [Port Mapping](#port-mapping)
 - [Generate Command](#generate-command)
 
+## Introduction
+
 ## Decisions Made
 
 ## Software Requirements
 
+- [Bruno](https://www.usebruno.com) (REST Documentation)
 - Docker Desktop (optional: with K8s; or Minikube)
 - MongoDB Compass
 - NodeJS (v22+)
@@ -22,12 +26,24 @@
 
 ## Running the Services
 
-1. Duplicate the `.env.sample` file located in the root directory and provide the necessary values.
-2. Run `tilt up` to start the services on your local machine.
+1. Clone the repository
+2. Copy the `.env.sample` file located in the root directory and provide the necessary values.
+3. Run `tilt up` to start the services on your local machine.
 
    - **`tilt up`**: Runs the services locally; MongoDB using docker-compose
    - **`tilt up -- --compose=k8s`**: Runs all services in kubernetes; MongoDB using docker-compose
    - **`tilt up -- --compose=all`**: Runs all services in Docker Compose.
+
+## Accessing the API documentation
+
+1. Open the bruno folder in the bruno application
+2. Endpoints are arranged per module and per function
+3. On the upper right, select the `Local` environment
+4. Run `User > Authentication > Sign Up` to register OR Run `User > Authentication > Sign In` to login
+5. Run `User > Session > Refresh Session` to refresh your tokens
+6. Run other endpoints in the collection
+
+Bruno is a Postman alternative that offers several key advantages. Unlike Postman, Bruno is free to use without paywalls and provides built-in version control for your API endpoints. A particularly convenient feature is its automatic token management - when you make requests to authentication endpoints like signing in, signing up, and refreshing session, Bruno automatically extracts and sets the tokens for you, eliminating the need for manual token handling in the documentation.
 
 ## Container building
 

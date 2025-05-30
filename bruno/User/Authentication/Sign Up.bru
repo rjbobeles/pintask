@@ -1,0 +1,39 @@
+meta {
+  name: Sign Up
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{API_URL}}/api/auth/sign_up
+  body: json
+  auth: none
+}
+
+headers {
+  device_id: {{DEVICE_ID}}
+}
+
+body:json {
+  {
+      "email": "{{EMAIL}}",
+      "first_name": "{{FIRST_NAME}}",
+      "last_name": "{{LAST_NAME}}",
+      "password": "{{PASSWORD}}"
+  }
+}
+
+script:post-response {
+  var jsonData = res.getBody()
+  
+  if (res.getStatus() === 200) {
+    if (jsonData.tokens?.access_token) {
+      bru.setEnvVar("ACCESS_TOKEN", jsonData.tokens.access_token)
+    }
+  
+    if(jsonData.tokens?.refresh_token) {
+      bru.setEnvVar("REFRESH_TOKEN", jsonData.tokens.refresh_token)
+    }
+  } 
+  
+}

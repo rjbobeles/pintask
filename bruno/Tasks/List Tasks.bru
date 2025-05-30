@@ -1,0 +1,27 @@
+meta {
+  name: List Tasks
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{API_URL}}/api/task?skip=0&limit=10&completed=false&priority=medium&priority=low
+  body: none
+  auth: bearer
+}
+
+params:query {
+  skip: 0
+  limit: 10
+  completed: false
+  priority: medium
+  priority: low
+}
+
+headers {
+  device_id: {{DEVICE_ID}}
+}
+
+auth:bearer {
+  token: {{ACCESS_TOKEN}}
+}

@@ -1,0 +1,24 @@
+meta {
+  name: List Sessions
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{API_URL}}/api/session?skip=0&limit=50
+  body: none
+  auth: bearer
+}
+
+params:query {
+  skip: 0
+  limit: 50
+}
+
+headers {
+  device_id: {{DEVICE_ID}}
+}
+
+auth:bearer {
+  token: {{ACCESS_TOKEN}}
+}

@@ -1,0 +1,34 @@
+meta {
+  name: Refresh Session
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{API_URL}}/api/session/refresh
+  body: none
+  auth: bearer
+}
+
+headers {
+  device_id: {{DEVICE_ID}}
+}
+
+auth:bearer {
+  token: {{ACCESS_TOKEN}}
+}
+
+script:post-response {
+  var jsonData = res.getBody()
+  
+  if (res.getStatus() === 200) {
+    if (jsonData.tokens?.access_token) {
+      bru.setEnvVar("ACCESS_TOKEN", jsonData.tokens.access_token)
+    }
+  
+    if(jsonData.tokens?.refresh_token) {
+      bru.setEnvVar("REFRESH_TOKEN", jsonData.tokens.refresh_token)
+    }
+  } 
+  
+}

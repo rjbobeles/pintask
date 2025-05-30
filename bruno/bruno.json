@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "PinTask",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
