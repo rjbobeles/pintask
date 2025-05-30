@@ -71,7 +71,7 @@ export const UpdateTask = async (req: Request, res: Response, next: NextFunction
     )
     if (errors !== null) throw new HttpException(400, 'Unable to process request due to malformed data', errors, ErrorCodes.VALIDATION_ERROR)
 
-    const userTask = await Task.findOne({ _id: new Types.ObjectId(req.params.task_id), _userId: req.user.data._id })
+    const userTask = await Task.findOne({ _id: new Types.ObjectId(req.params.task_id), _userId: req.user.data._id }).lean()
     if (!userTask) throw new HttpException(404, 'Task not found', undefined, ErrorCodes.TASK_NOT_FOUND)
 
     const updatePayload: AnyKeys<TaskData> = {}
