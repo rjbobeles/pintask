@@ -33,7 +33,7 @@ Tilt typically handles local Kubernetes orchestration, though here it automates 
 
 ### Unit Testing
 
-Unit testing remains a critical component for application reliability. Given project scope and timeline constraints, the current test suite primarily demonstrates implementation patterns while providing a foundation for broader coverage expansion. Automated testing pipelines execute on pull request creation, validating both API and application layers. Reference implementations can be found in [this successful build](https://github.com/rjbobeles/pintask/pull/14) and [this intentionally failing example](https://github.com/rjbobeles/pintask/pull/13), illustrating both positive and negative test scenarios.
+Unit testing remains a critical component for application reliability. Given project scope and timeline constraints, the current test suite primarily demonstrates implementation patterns while providing a foundation for broader coverage expansion. Automated testing pipelines execute on pull request creation, validating both API and application layers. Reference implementations can be found in [this successful test](https://github.com/rjbobeles/pintask/pull/14) and [this intentionally failing test](https://github.com/rjbobeles/pintask/pull/13), illustrating both positive and negative test scenarios.
 
 ## Software Requirements
 
