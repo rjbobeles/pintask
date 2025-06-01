@@ -69,7 +69,7 @@ export const TaskFormModal = ({
         title: data.title.trim(),
         description: data.description?.trim() || '',
         priority: data.priority,
-        due_date: data.dueDate ? new Date(data.dueDate).toISOString() : null,
+        due_date: data.dueDate ? new Date(data.dueDate).toISOString() : undefined,
       } as never)
       onClose()
     } catch (error) {
