@@ -22,7 +22,7 @@ export const JwtRefreshTokenGuard = async (req: Request, res: Response, next: Ne
           },
           customSanitizer: {
             options: (value: string) => {
-              return value.replace(/^Bearer\s+/, '')
+              return value ? value.replace(/^Bearer\s+/, '') : undefined
             },
           },
         },
