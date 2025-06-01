@@ -76,7 +76,7 @@ def setup_k8s_application():
 
 def setup_service_manual(): 
     local_resource(
-        name="main-service",
+        name="api-main",
         serve_cmd="yarn nx run api-main:serve --configuration=development",
         allow_parallel=True,
         serve_env={
