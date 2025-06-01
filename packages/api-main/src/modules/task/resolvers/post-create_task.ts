@@ -33,7 +33,7 @@ export const CreateTask = async (req: Request, res: Response, next: NextFunction
           optional: true,
           isString: { errorMessage: 'Priority must be a string' },
           isIn: {
-            options: [['low', 'medium', 'high']],
+            options: [['Low', 'Medium', 'High']],
             errorMessage: 'Priority must be one of: low, medium, high',
           },
         },
@@ -55,7 +55,7 @@ export const CreateTask = async (req: Request, res: Response, next: NextFunction
       data: {
         title: req.body.title,
         description: req.body.description || '',
-        priority: req.body.priority || 'medium',
+        priority: req.body.priority || 'Medium',
         due_date: req.body.due_date ? new Date(req.body.due_date) : null,
       },
       created_at: new Date(),

@@ -46,7 +46,7 @@ export const UpdateTask = async (req: Request, res: Response, next: NextFunction
           optional: true,
           isString: { errorMessage: 'Priority must be a string' },
           isIn: {
-            options: [['low', 'medium', 'high']],
+            options: [['Low', 'Medium', 'High']],
             errorMessage: 'Priority must be one of: low, medium, high',
           },
         },

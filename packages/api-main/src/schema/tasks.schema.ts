@@ -22,8 +22,8 @@ export const TaskDataSchema = new Schema(
     },
     priority: {
       type: String,
-      enum: ['low', 'medium', 'high'],
-      default: 'medium',
+      enum: ['Low', 'Medium', 'High'],
+      default: 'Medium',
     },
     due_date: {
       type: Date,

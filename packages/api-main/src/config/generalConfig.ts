@@ -13,6 +13,10 @@ export const generalConfig: GeneralConfig = {
   name: process.env.NAME ? process.env.NAME : 'API Main',
   environment_name: process.env.ENVIRONMENT_NAME ? process.env.ENVIRONMENT_NAME : 'development',
   port: 4000,
-  cors: {},
+  cors: {
+    origin: 'http://localhost:3000',
+    allowedHeaders: ['device_id', 'Authorization', 'Content-Type'],
+    methods: ['GET', 'PATCH', 'POST', 'DELETE'],
+  },
   helmet: {},
 }

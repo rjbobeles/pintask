@@ -74,7 +74,7 @@ export const ListTasks = async (req: Request, res: Response, next: NextFunction)
               if (!Array.isArray(value)) {
                 throw new Error('Priority must be an array')
               }
-              const validPriority = ['low', 'medium', 'high']
+              const validPriority = ['Low', 'Medium', 'High']
               const invalidItems = value.filter((item) => !validPriority.includes(item))
               if (invalidItems.length > 0) {
                 throw new Error(`Invalid priority values: ${invalidItems.join(', ')}. Allowed values are: ${validPriority.join(', ')}`)
@@ -106,10 +106,10 @@ export const ListTasks = async (req: Request, res: Response, next: NextFunction)
         count: await Task.countDocuments(searchQuery),
         tasks: await Task.find(
           searchQuery,
-          { 'data.description': 0 },
+          {},
           {
             skip: req.query.skip !== undefined ? Number(req.query.skip) : 0,
-            limit: req.query.limit ? Number(req.query.limit) : 10,
+            limit: req.query.limit ? Number(req.query.limit) : 12,
             sort: { created_at: -1 },
           },
         )
