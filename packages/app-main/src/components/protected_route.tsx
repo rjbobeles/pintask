@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router'
 
-import { useUserAuthentication } from '../context/userAuthentication'
+import { useUserAuthentication } from '../contexts/userAuthentication'
 
 export const ProtectedRoute = () => {
   const { isAuthenticated } = useUserAuthentication()
+
   const navigate = useNavigate()
   const location = useLocation()
 
